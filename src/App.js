@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -20,7 +19,7 @@ function TodoList(props) {
   return (
     <ul>
       {props.todos.map(todo => (
-        <li>{todo.text}</li>
+        <li key={todo.id}>{todo.text}</li>
       ))}
     </ul>
   )

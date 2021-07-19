@@ -8,9 +8,10 @@ function App() {
   ];
 
   return (
-    <div className="App">
+    <div>
       <h1>Todo List</h1>
       <TodoList todos={todos} />
+      <AddTodo></AddTodo>
     </div>
   );
 }
@@ -18,10 +19,19 @@ function App() {
 function TodoList({todos}) {
   return (
     <ul>
-      {todos.map(todo => (
+      {todos.map((todo) => (
         <li key={todo.id}>{todo.text}</li>
       ))}
     </ul>
+  );
+}
+
+function AddTodo() {
+  return (
+    <form>
+      <input placeholder="Add todo" />
+      <button type="submit">Submit</button>
+    </form>
   )
 }
 

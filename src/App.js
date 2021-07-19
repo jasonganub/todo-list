@@ -15,10 +15,10 @@ function App() {
   );
 }
 
-function TodoList(props) {
+function TodoList({todos}) {
   return (
     <ul>
-      {props.todos.map(todo => (
+      {todos.map(todo => (
         <li key={todo.id}>{todo.text}</li>
       ))}
     </ul>

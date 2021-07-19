@@ -29,21 +29,26 @@ function TodoList({todos}) {
 }
 
 function AddTodo({setTodos}) {
+const inputRef = React.useRef();
+
   function handleAddTodo(event) {
     // to stop the page from refreshing by default
     event.preventDefault();
-    const text = event.target.elements.addTodo.value;
+    const text = inputRef.current.value;
     const todo = {
       id: 4,
       text: text,
       done: false
     }
-    setTodos([todo])
+    inputRef.current.value = "";
+    setTodos(prevTodos => {
+      return prevTodos.concat(todo)
+    })
   }
 
   return (
     <form onSubmit={handleAddTodo}>
-      <input name="addTodo" placeholder="Add todo" />
+      <input name="addTodo" placeholder="Add todo" ref={inputRef}/>
       <button type="submit">Submit</button>
     </form>
   )

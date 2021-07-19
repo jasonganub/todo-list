@@ -27,9 +27,15 @@ function TodoList({todos}) {
 }
 
 function AddTodo() {
+  function handleAddTodo(event) {
+    // to stop the page from refreshing by default
+    event.preventDefault();
+    console.log(event.target.elements.addTodo.value);
+  }
+
   return (
-    <form>
-      <input placeholder="Add todo" />
+    <form onSubmit={handleAddTodo}>
+      <input name="addTodo" placeholder="Add todo" />
       <button type="submit">Submit</button>
     </form>
   )

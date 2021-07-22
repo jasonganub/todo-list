@@ -39,10 +39,36 @@ function TodoList({ todos, setTodos }) {
           }}
           key={todo.id}>
           {todo.text}
+          <DeleteTodo todo={todo} setTodos={setTodos}></DeleteTodo>
         </li>
       ))}
     </ul>
   );
+}
+
+function DeleteTodo({ todo, setTodos }) {
+  function handleDeleteTodo() {
+    const confirmed = window.confirm("Are you sure?");
+    if (confirmed) {
+      setTodos(prevTodos => {
+        return prevTodos.filter(t => t.id !== todo.id);
+      })
+    }
+  }
+
+  return (
+    <span
+      onClick={handleDeleteTodo}
+      role="button"
+      style={{
+        color: "red",
+        fontWeight: "bold",
+        marginLeft: 10,
+        cursor: "pointer"
+      }}>
+      x
+    </span>
+  )
 }
 
 function AddTodo({ setTodos }) {

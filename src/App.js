@@ -19,10 +19,22 @@ function App() {
 }
 
 function TodoList({todos}) {
+
+  function handleToggleTodo(todo) {
+    console.log(todo)
+  }
+
   return (
     <ul>
       {todos.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
+        <li
+        onClick={() => handleToggleTodo(todo)}
+        style={{
+          textDecoration: todo.done ? 'line-through' : ""
+        }}
+        key={todo.id}>
+          {todo.text}
+        </li>
       ))}
     </ul>
   );

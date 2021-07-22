@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 function App() {
-  // set the state todos wth setTodos function
+  // set the state todos wth setTodos setter function
   const [todos, setTodos] = React.useState([
     { id: 1, text: "Wash dishes", done: false },
     { id: 2, text: "Do laundry", done: false },
@@ -12,27 +12,32 @@ function App() {
   return (
     <div>
       <h1>Todo List</h1>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} setTodos={setTodos} />
       <AddTodo setTodos={setTodos}></AddTodo>
     </div>
   );
 }
 
-function TodoList({todos}) {
-
+function TodoList({ todos, setTodos }) {
   function handleToggleTodo(todo) {
-    console.log(todo)
+    const updatedTodos = todos.map(t =>
+      todo.id === t.id ? {
+        ...t,
+        done: !t.done
+      } : t
+    );
+    setTodos(updatedTodos)
   }
 
   return (
     <ul>
       {todos.map((todo) => (
         <li
-        onClick={() => handleToggleTodo(todo)}
-        style={{
-          textDecoration: todo.done ? 'line-through' : ""
-        }}
-        key={todo.id}>
+          onClick={() => handleToggleTodo(todo)}
+          style={{
+            textDecoration: todo.done ? 'line-through' : ""
+          }}
+          key={todo.id}>
           {todo.text}
         </li>
       ))}
@@ -40,8 +45,8 @@ function TodoList({todos}) {
   );
 }
 
-function AddTodo({setTodos}) {
-const inputRef = React.useRef();
+function AddTodo({ setTodos }) {
+  const inputRef = React.useRef();
 
   function handleAddTodo(event) {
     // to stop the page from refreshing by default
@@ -60,7 +65,7 @@ const inputRef = React.useRef();
 
   return (
     <form onSubmit={handleAddTodo}>
-      <input name="addTodo" placeholder="Add todo" ref={inputRef}/>
+      <input name="addTodo" placeholder="Add todo" ref={inputRef} />
       <button type="submit">Submit</button>
     </form>
   )

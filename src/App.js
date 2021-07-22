@@ -53,7 +53,7 @@ function AddTodo({ setTodos }) {
     event.preventDefault();
     const text = inputRef.current.value;
     const todo = {
-      id: 4,
+      id: Math.random(),
       text: text,
       done: false
     }

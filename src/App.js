@@ -33,7 +33,7 @@ function TodoList({ todos, setTodos }) {
     <ul>
       {todos.map((todo) => (
         <li
-          onClick={() => handleToggleTodo(todo)}
+          onDoubleClick={() => handleToggleTodo(todo)}
           style={{
             textDecoration: todo.done ? 'line-through' : ""
           }}
